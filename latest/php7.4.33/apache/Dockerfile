@@ -76,7 +76,8 @@ RUN set -ex; \
 	err="$(php --version 3>&1 1>&2 2>&3)"; \
 	[ -z "$err" ]
 
-# set custom PHP.ini settings (x5 for default one: https://www.php.net/manual/en/ini.core.php#ini.upload-max-filesize)
+# set custom PHP.ini settings
+# to upload UpdraftPlus Premium plugin we need to increase limit (x5 for default one: https://www.php.net/manual/en/ini.core.php#ini.upload-max-filesize)
 RUN { \
 		echo 'upload_max_filesize = 10M'; \
 	} > /usr/local/etc/php/conf.d/custom.ini

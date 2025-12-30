@@ -122,6 +122,21 @@ if ($configExtra = getenv_docker('WORDPRESS_CONFIG_EXTRA', '')) {
 	eval($configExtra);
 }
 
+// Fix loopback requests inside container
+add_filter('http_request_host_is_external', '__return_true');
+
+add_filter('http_request_args', function($args, $url) {
+    $site_url = get_option('siteurl');
+    if (strpos($url, $site_url) !== false) {
+        // Replace public domain with internal address
+        $url = str_replace($site_url, 'http://127.0.0.1', $url);
+        $args['url'] = $url;
+        $args['timeout'] = 30;       // increase timeout
+        $args['sslverify'] = false;  // disable SSL for internal requests
+    }
+    return $args;
+}, 10, 2);
+
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */
