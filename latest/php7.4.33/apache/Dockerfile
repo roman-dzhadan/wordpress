@@ -76,6 +76,11 @@ RUN set -ex; \
 	err="$(php --version 3>&1 1>&2 2>&3)"; \
 	[ -z "$err" ]
 
+# set custom PHP.ini settings (x5 for default one: https://www.php.net/manual/en/ini.core.php#ini.upload-max-filesize)
+RUN { \
+		echo 'upload_max_filesize = 10M'; \
+	} > /usr/local/etc/php/conf.d/custom.ini
+
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
 RUN set -eux; \
