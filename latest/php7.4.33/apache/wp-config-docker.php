@@ -126,16 +126,6 @@ if ($configExtra = getenv_docker('WORDPRESS_CONFIG_EXTRA', '')) {
 // INTERNAL LOOPBACK / REST API FIX STARTS
 // -------------------------------------------
 
-// Force internal requests to use HTTP, not HTTPS
-add_filter('https_ssl_verify', '__return_false'); // optional for container dev
-add_filter('wp_http_validate_url', function($url) {
-    // rewrite mirror.villaestate.pl HTTPS → HTTP for internal requests
-    if (strpos($url, 'https://mirror.villaestate.pl') === 0) {
-        $url = str_replace('https://mirror.villaestate.pl', 'http://mirror.villaestate.pl', $url);
-    }
-    return $url;
-});
-
 // Disable real-time WP-Cron to avoid HTTPS loopbacks
 define('DISABLE_WP_CRON', true);
 
