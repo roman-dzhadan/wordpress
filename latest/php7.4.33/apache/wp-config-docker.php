@@ -125,16 +125,9 @@ if ($configExtra = getenv_docker('WORDPRESS_CONFIG_EXTRA', '')) {
 // -------------------------------------------
 // INTERNAL LOOPBACK / REST API FIX STARTS
 // -------------------------------------------
-
-define('WP_HOME', 'http://mirror.villaestate.pl');
-define('WP_SITEURL', 'http://mirror.villaestate.pl');
-// Disable real-time WP-Cron to avoid HTTPS loopbacks
-define('DISABLE_WP_CRON', true);
-
-// Force WordPress to treat all requests as HTTP internally
+define('FORCE_SSL_ADMIN', false);
 $_SERVER['HTTPS'] = 'off';
 $_SERVER['SERVER_PORT'] = 80;
-
 // -------------------------------------------
 // INTERNAL LOOPBACK / REST API FIX ENDS
 // -------------------------------------------
