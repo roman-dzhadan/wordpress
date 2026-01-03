@@ -19,5 +19,8 @@ COPY apache-ssl.conf /etc/apache2/sites-available/default-ssl.conf
 # Enable SSL site
 RUN a2ensite default-ssl
 
+# --- PHP upload / execution limits ---
+COPY uploads.ini /usr/local/etc/php/conf.d/uploads.ini
+
 # Expose HTTPS (internal use only)
 EXPOSE 443
