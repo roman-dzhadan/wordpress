@@ -168,6 +168,7 @@ RUN set -eux; \
 VOLUME /var/www/html
 
 COPY --chown=www-data:www-data wp-config-docker.php /usr/src/wordpress/
+COPY fix-admin-ajax-http.php /var/www/html/var/www/html/wp-content/mu-plugins/internal-loopback.php
 COPY docker-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
