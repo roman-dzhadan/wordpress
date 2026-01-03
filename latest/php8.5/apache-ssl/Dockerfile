@@ -1,4 +1,4 @@
-FROM docker.io/library/wordpress:php8.5-apache
+FROM docker.io/library/wordpress:6.9.0-php8.5-apache
 
 # Enable Apache SSL module
 RUN a2enmod ssl
