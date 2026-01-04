@@ -126,6 +126,7 @@ if ($configExtra = getenv_docker('WORDPRESS_CONFIG_EXTRA', '')) {
 // INTERNAL LOOPBACK / REST API FIX STARTS
 // -------------------------------------------
 define('FORCE_SSL_ADMIN', false);
+define('UPDRAFTPLUS_ADDONS_SSL', false);
 $_SERVER['HTTPS'] = 'off';
 $_SERVER['SERVER_PORT'] = 80;
 // -------------------------------------------
