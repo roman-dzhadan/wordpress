@@ -76,12 +76,6 @@ RUN set -ex; \
 	err="$(php --version 3>&1 1>&2 2>&3)"; \
 	[ -z "$err" ]
 
-# set custom PHP.ini settings
-# to upload UpdraftPlus Premium plugin we need to increase limit (x5 for default one: https://www.php.net/manual/en/ini.core.php#ini.upload-max-filesize)
-RUN { \
-		echo 'upload_max_filesize = 10M'; \
-	} > /usr/local/etc/php/conf.d/custom.ini
-
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
 RUN set -eux; \
@@ -168,7 +162,6 @@ RUN set -eux; \
 VOLUME /var/www/html
 
 COPY --chown=www-data:www-data wp-config-docker.php /usr/src/wordpress/
-COPY fix-admin-ajax-http.php /var/www/html/var/www/html/wp-content/mu-plugins/internal-loopback.php
 COPY docker-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
