@@ -164,5 +164,8 @@ VOLUME /var/www/html
 COPY --chown=www-data:www-data wp-config-docker.php /usr/src/wordpress/
 COPY docker-entrypoint.sh /usr/local/bin/
 
+# --- PHP upload / execution limits ---
+COPY uploads.ini /usr/local/etc/php/conf.d/uploads.ini
+
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["apache2-foreground"]
